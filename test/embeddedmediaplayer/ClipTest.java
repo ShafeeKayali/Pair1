@@ -117,6 +117,20 @@ public class ClipTest {
     @Test
     public void testEqualsOnEqualClips() 
     {
+        boolean clipIsNull = false, ClipsAreSame = false;
+        System.out.println("Check the Equals function is working on the equals clips)");
+        
+        // Check if the two clips already prapared by the same Start,End and title are the same with equal function 
+        if (instanceClip1.equals(instanceClip2))
+            ClipsAreSame = true;
+        
+        // Check if the clip with start,end and title values is equal with the new empty clip 
+        Clip instanceClipEmpty = new Clip(); // creating another new clip
+        instanceClipEmpty = null; // make this clip empty
+        if (!instanceClip1.equals(instanceClipEmpty))
+            clipIsNull = true;
+        
+        assertEquals(true,clipIsNull&&ClipsAreSame);
     }
     
     @Test
