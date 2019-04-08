@@ -153,6 +153,16 @@ public class ClipTest {
     @Test
     public void testSetEndToNegativeNumberKeepsPreviousValue() 
     {
+        System.out.println("Set the end time as a negative number (Keeps previous value)");
+        boolean endTimeAsNegative = false;
+        // Try to set the end time as a negative number.
+        int endTimeBeforeModified = instanceClip1.getEnd(); //Get the real end time of the sub-clip before made any changes.
+        instanceClip1.setEnd(-10); //Try to set end time to negative 10
+        int endTimeAfterModified = instanceClip1.getEnd(); //Get the real end time of the sub-clip after made changes.
+        if (endTimeBeforeModified==endTimeAfterModified);
+            endTimeAsNegative = true;  
+        
+        assertEquals(true,endTimeAsNegative);
     }
     
     @Test
