@@ -136,6 +136,18 @@ public class ClipTest {
     @Test
     public void testEqualsOnNonEqualClips() 
     {
+        boolean ClipsAreNotTheSame = false;
+        System.out.println("Check the Equals function is working on the NOT equals clips)");
+        
+        // Check if the clip already prapared are not the same with equals function 
+        instanceClip2.setStart(5); // change the start time for the clip2 to 5
+        instanceClip2.setEnd(25); // change the end time for the clip2 to 25
+        instanceClip2.setTitle("changeValues"); // change the title for the clip2 to changeValues
+        if (!instanceClip1.equals(instanceClip2)) /// if not equals
+            ClipsAreNotTheSame = true;
+        
+        assertEquals(true,ClipsAreNotTheSame);
+        
     }
     
     @Test
