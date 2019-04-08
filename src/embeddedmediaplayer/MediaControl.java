@@ -350,9 +350,14 @@ public class MediaControl extends VBox {
         });
         
         final Button btnAllCaps= new Button("UPPER");
-        btnNudgeBack.setStyle("-fx-max-width:infinity");
-        btnNudgeBack.setOnAction(new EventHandler<ActionEvent>() {
+        btnAllCaps.setStyle("-fx-max-width:infinity");
+        btnAllCaps.setTooltip(new Tooltip("Make the selected clip's title upper case"));
+        btnAllCaps.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
+                Clip p = table.getSelectionModel().getSelectedItem(); // select and (get) the item (clip) from the table
+                if (p==null) return;  // check if the selected item (clip) from table is empty 
+                p.setTitle(p.getTitle().toUpperCase()); // set the title for that clip from the old title as upper case
+                doTableRefresh(table); //refresh the table to update the new title
             }
         });
         
@@ -503,7 +508,7 @@ public class MediaControl extends VBox {
           
           //gridBox.add(btnNudgeBack,6,1,1,1);
           //gridBox.add(btnNudgeForward,6,1,1,1);
-          //gridBox.add(btnAllCaps,8,1,1,1);
+          gridBox.add(btnAllCaps,7,1,1,1);
           //gridBox.add(btnNudgeSelectedStartBack,8,1,1,1);
           //gridBox.add(btnNudgeSelectedStartForward,8,1,1,1);
           
