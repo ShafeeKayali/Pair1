@@ -81,6 +81,37 @@ public class ClipTest {
     @Test
     public void testSetEndBeforeStartKeepsPreviousValue()
     {
+        System.out.println("Set the end time before start one (Keeps previous value)");
+        boolean endBeforeStart = false, endEqualStart = false, endAtZero = false, endAtNull = false;
+        // Try to set the end time before the start one.
+        int endTimeBeforeModified = instanceClip1.getEnd(); //Get the real end time of the sub-clip before made any changes.
+        instanceClip1.setEnd(instanceClip1.getStart()-5);
+        int endTimeAfterModified = instanceClip1.getEnd(); //Get the real end time of the sub-clip after made changes.
+        if (endTimeBeforeModified==endTimeAfterModified)
+            endBeforeStart = true;
+        
+        // Try to set the end time equal to the start one.
+        endTimeBeforeModified = instanceClip1.getEnd(); //Get the real end time of the sub-clip before made any changes.
+        instanceClip1.setEnd(instanceClip1.getStart()); // Tty to set the end time equals to start one
+        endTimeAfterModified = instanceClip1.getEnd(); //Get the real end time of the sub-clip after made changes.
+        if (endTimeBeforeModified==endTimeAfterModified) return; // !!Should be modified in the program!!
+        endEqualStart = true; // Can't bn the start and the end time the same % if (end<$=$start.get()) return; %
+        
+        // Try to set the end time equal to Zero.
+        endTimeBeforeModified = instanceClip1.getEnd(); //Get the real end time of the sub-clip before made any changes.
+        instanceClip1.setEnd(0); //Try to set end time to Zero
+        endTimeAfterModified = instanceClip1.getEnd(); //Get the real end time of the sub-clip after made changes.
+        if (endTimeBeforeModified==endTimeAfterModified) // it is not because zero it is because less than start point
+            endAtZero = true;
+        
+        // Try to set the end time equal to Null.
+        endTimeBeforeModified = instanceClip1.getEnd(); //Get the real end time of the sub-clip before made any changes.
+        instanceClip1.setEnd(null); //Try to set end time to null
+        endTimeAfterModified = instanceClip1.getEnd(); //Get the real end time of the sub-clip after made changes.
+        if (endTimeBeforeModified==endTimeAfterModified)
+            endAtNull = true;
+        
+        assertEquals(true,endBeforeStart&&endEqualStart&&endAtZero&&endAtNull);
     }
 
     @Test
