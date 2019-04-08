@@ -168,6 +168,45 @@ public class ClipTest {
     @Test
     public void testSetStartToValidPositiveNumber() 
     {    
+        System.out.println("Test setStart to valid positive number and other conditions");
+        boolean startAtPositiveNumber = false, startLessZero = false, startEqualNull = false, startGreaterThanEnd = false, startGreaterThanMax = false;
+        
+        // Try to set the strat time to positive number (Should changed if < End Time).
+        int startTimeBeforeModified = instanceClip1.getStart(); //Get the real start time of the sub-clip before made any changes.
+        instanceClip1.setStart(25); //Try to set start time at 25 (Positive number and less than end time)
+        int startTimeAfterModified = instanceClip1.getStart(); //Get the real start time of the sub-clip after made changes.
+        if (startTimeBeforeModified!=startTimeAfterModified && startTimeAfterModified==25) // Check if the start time before and after modification is not equals and start time after modification is equals to new value (25)
+            startAtPositiveNumber = true;
+        
+        // Try to set the start time less than zero.
+        startTimeBeforeModified = instanceClip1.getStart(); //Get the real start time of the sub-clip before made any changes.
+        instanceClip1.setStart(-5); // Tty to set the start time equals to -5
+        startTimeAfterModified = instanceClip1.getStart(); //Get the real start time of the sub-clip after made changes.
+        if (startTimeBeforeModified==startTimeAfterModified)
+            startLessZero = true;
+        
+        // Try to set the start time equal to null.
+        startTimeBeforeModified = instanceClip1.getStart(); //Get the real start time of the sub-clip before made any changes.
+        instanceClip1.setStart(null); // Tty to set the start time equals to null
+        startTimeAfterModified = instanceClip1.getStart(); //Get the real start time of the sub-clip after made changes.
+        if (startTimeBeforeModified==startTimeAfterModified);
+            startEqualNull = true;
+        
+        // Try to set the strat time greater than end.
+        startTimeBeforeModified = instanceClip1.getStart(); //Get the real start time of the sub-clip before made any changes.
+        instanceClip1.setStart(instanceClip1.getEnd()+10); //Try to set start time at end +10
+        startTimeAfterModified = instanceClip1.getStart(); //Get the real start time of the sub-clip after made changes.
+        if (startTimeBeforeModified==startTimeAfterModified) 
+            startGreaterThanEnd = true;
+        
+        // Try to set the strat time greater than max.
+        startTimeBeforeModified = instanceClip1.getStart(); //Get the real start time of the sub-clip before made any changes.
+        instanceClip1.setStart(instanceClip1.getMax()+10); //Try to set start time at max +10
+        startTimeAfterModified = instanceClip1.getStart(); //Get the real start time of the sub-clip after made changes.
+        if (startTimeBeforeModified==startTimeAfterModified) 
+            startGreaterThanMax = true;
+        
+        assertEquals(true,startAtPositiveNumber&&startLessZero&&startEqualNull&&startGreaterThanEnd&&startGreaterThanMax);
     }
     
     
